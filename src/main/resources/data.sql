@@ -1,0 +1,1 @@
+insert into client(id,uuid,name,email) values (1,'40424db2-5808-11ee-8c99-0242ac120002','gabriel','brgabriel.monteiro@gmail.com')

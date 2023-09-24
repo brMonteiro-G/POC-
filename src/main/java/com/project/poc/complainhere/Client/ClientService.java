@@ -19,7 +19,7 @@ public class ClientService {
         return this.repository.findAll();
     }
 
-    public Client create(ClientDTO clientDTO) throws JsonProcessingException {
+    public Client create(ClientRequestDTO clientDTO) throws JsonProcessingException {
 
         //usar object mapper
 

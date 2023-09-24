@@ -19,7 +19,7 @@ private final  ClientService service;
 
 
     @PostMapping(path = "/create")
-    public Client postClient(@RequestBody ClientDTO clientDTO) throws JsonProcessingException {
+    public Client postClient(@RequestBody ClientRequestDTO clientDTO) throws JsonProcessingException {
         return this.service.create(clientDTO);
     }
 

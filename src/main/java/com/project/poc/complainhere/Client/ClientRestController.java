@@ -1,14 +1,13 @@
 package com.project.poc.complainhere.Client;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/complain-here")
+@RequestMapping("/complain-here/clients")
 public class ClientRestController {
 
 
@@ -18,10 +17,19 @@ private final  ClientService service;
         this.service = service;
     }
 
-    @GetMapping(path = "/clients")
+
+    @PostMapping(path = "/create")
+    public Client postClient(@RequestBody ClientDTO clientDTO) throws JsonProcessingException {
+        return this.service.create(clientDTO);
+    }
+
+    @GetMapping(path = "/fetch")
     public List<Client> getAllClients() {
         return this.service.getAll();
 }
+
+
+
 
 
 }

@@ -1,5 +1,7 @@
 package com.project.poc.complainhere.Client;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,16 @@ public class ClientService {
         return this.repository.findAll();
     }
 
+    public Client create(ClientDTO clientDTO) throws JsonProcessingException {
 
+        //usar object mapper
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        System.out.println(clientDTO.toString());
+        Client teste = objectMapper.readValue(clientDTO.toString(), Client.class);
+
+
+        return this.repository.save(teste);
+    }
 
 }

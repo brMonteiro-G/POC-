@@ -6,7 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -22,7 +21,7 @@ public class Client {
     private UUID uuid;
     private String name;
     private String email;
-    private LocalDate dateOfBirth;
+//    private LocalDate dateOfBirth;
 
 
 }

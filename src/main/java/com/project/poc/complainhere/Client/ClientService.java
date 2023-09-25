@@ -1,40 +1,79 @@
 package com.project.poc.complainhere.Client;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService {
 
     private final ClientRepository repository;
-    @Autowired
-    private ModelMapper modelMapper;
 
-    public ClientService(ClientRepository repository) {
+    private final ModelMapper modelMapper;
+
+
+    public ClientService(ClientRepository repository, ModelMapper modelMapper) {
         this.repository = repository;
+        this.modelMapper = modelMapper;
     }
 
-    public List<Client> getAll(){
+    public Client create(ClientRequestDTO clientDTO) {
+
+        Client client = modelMapper.map(clientDTO, Client.class);
+
+        return this.repository.save(client);
+    }
+
+    public List<Client> getAll() {
         return this.repository.findAll();
     }
 
-    public Client create(ClientRequestDTO clientDTO) throws JsonProcessingException {
+    public Optional<Client> getSingle(String name) {
+        Optional<Client> client = this.repository.findClientByName(name);
 
-        //usar object mapper
+        if (client.isEmpty()) {
+            throw new RuntimeException("user not found");
+        }
 
-        //ObjectMapper objectMapper = new ObjectMapper();
-        System.out.println(clientDTO.toString());
+        return client;
 
-       // Client teste = objectMapper.readValue(clientDTO.toString(), Client.class);
-
-        Client teste =  modelMapper.map(clientDTO, Client.class);
-
-
-        return this.repository.save(teste);
     }
+
+    @Transactional
+    public Optional<Client> delete(String name) {
+        Optional<Client> client = this.repository.deleteClientByName(name);
+
+        if (client.isEmpty()) {
+            throw new RuntimeException("user not found");
+        }
+
+        return client;
+
+
+    }
+
+    @Transactional
+    public Optional<Client> put(String name, ClientRequestDTO clientDTO) {
+
+        Client client = modelMapper.map(clientDTO, Client.class);
+
+
+        Optional<Client> register = this.repository.findClientByName(name);
+
+
+        if (register.isEmpty()) {
+            throw new RuntimeException("user not found");
+        }
+
+        this.repository.deleteClientByName(name);
+
+
+        return Optional.of(this.repository.save(client));
+
+    }
+
 
 }

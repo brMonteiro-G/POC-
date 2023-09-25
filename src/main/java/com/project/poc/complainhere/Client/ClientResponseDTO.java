@@ -5,16 +5,11 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class ClientResponseDTO {
 
     private String name;
     private String email;
     private String message;
 
-
-
-    @Override
-    public String toString() {
-        return "{ \"name\" : \"" + this.name + "\", \"email\" : \"" + this.email + "\" }";
-    }
 }

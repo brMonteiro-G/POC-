@@ -10,9 +10,10 @@ import java.util.List;
 @Service
 public class EnterpriseService {
 
-    private final EnterpriseRepository repository;
     @Autowired
     private ModelMapper modelMapper;
+    private final EnterpriseRepository repository;
+
 
     public EnterpriseService(EnterpriseRepository repository) {
         this.repository = repository;
@@ -24,8 +25,6 @@ public class EnterpriseService {
 
     public Enterprise create(EnterpriseRequestDTO enterpriseRequestDTO) throws JsonProcessingException {
 
-        //ObjectMapper objectMapper = new ObjectMapper();
-        //Enterprise teste = objectMapper.readValue(enterpriseRequestDTO.toString(), Enterprise.class);
         Enterprise teste =  modelMapper.map(enterpriseRequestDTO, Enterprise.class);
 
         return this.repository.save(teste);

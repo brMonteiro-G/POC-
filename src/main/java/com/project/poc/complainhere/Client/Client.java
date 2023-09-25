@@ -25,6 +25,6 @@ public class Client {
     private String dateOfBirth; //LocalDate
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("client")
+    @JsonIgnoreProperties("clients")
     private Enterprise enterprise;
 }

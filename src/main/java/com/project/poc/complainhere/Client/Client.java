@@ -1,9 +1,8 @@
 package com.project.poc.complainhere.Client;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.project.poc.complainhere.Enterprise.Enterprise;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.UUID;
@@ -14,6 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Table(name = "CLIENTS_TABLE")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,7 +21,10 @@ public class Client {
     private UUID uuid;
     private String name;
     private String email;
-//    private LocalDate dateOfBirth;
 
+    private String dateOfBirth; //LocalDate
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("client")
+    private Enterprise enterprise;
 }

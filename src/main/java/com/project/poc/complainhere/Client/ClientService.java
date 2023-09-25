@@ -1,7 +1,8 @@
 package com.project.poc.complainhere.Client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.List;
 public class ClientService {
 
     private final ClientRepository repository;
+    @Autowired
+    private ModelMapper modelMapper;
 
     public ClientService(ClientRepository repository) {
         this.repository = repository;
@@ -23,9 +26,12 @@ public class ClientService {
 
         //usar object mapper
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        //ObjectMapper objectMapper = new ObjectMapper();
         System.out.println(clientDTO.toString());
-        Client teste = objectMapper.readValue(clientDTO.toString(), Client.class);
+
+       // Client teste = objectMapper.readValue(clientDTO.toString(), Client.class);
+
+        Client teste =  modelMapper.map(clientDTO, Client.class);
 
 
         return this.repository.save(teste);

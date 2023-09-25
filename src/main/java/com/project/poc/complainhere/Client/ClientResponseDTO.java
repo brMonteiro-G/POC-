@@ -9,8 +9,8 @@ public class ClientResponseDTO {
 
     private String name;
     private String email;
-//    @JsonFormat(pattern="dd/MM/yyyy")
-//    private LocalDate dateOfBirth;
+    private String message;
+
 
 
     @Override

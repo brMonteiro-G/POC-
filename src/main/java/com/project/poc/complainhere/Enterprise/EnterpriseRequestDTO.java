@@ -10,8 +10,9 @@ import lombok.*;
 @ToString
 public class EnterpriseRequestDTO {
 
+
     private String name;
-    private EnumCategory category; //change to enum
+    private EnumCategory category;
 
 
 }

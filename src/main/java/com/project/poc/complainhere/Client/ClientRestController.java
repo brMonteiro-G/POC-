@@ -1,6 +1,7 @@
 package com.project.poc.complainhere.Client;
 
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class ClientRestController {
 
     @PostMapping(path = "/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client postClient(@RequestBody ClientRequestDTO clientDTO){
+    public Client postClient(@RequestBody @Valid ClientRequestDTO clientDTO){
         return this.service.create(clientDTO);
     }
 
